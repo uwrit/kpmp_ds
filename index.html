@@ -1,0 +1,518 @@
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: "Roboto";
+        }
+
+        .grid-container {
+            display: grid;
+            height: 100%;
+            grid-template-columns: 1fr;
+            grid-template-rows: 55px 1fr 80px;
+            grid-gap: 1px;
+            grid-template-areas: "kpmp-header""kpmp-content""kpmp-footer";
+        }
+
+        .kpmp-header {
+            grid-area: kpmp-header;
+            border-bottom-color: grey;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            padding: 10px 0px;
+            margin: 0px 10px -5px 10px;
+        }
+
+        .kpmp-content {
+            grid-area: kpmp-content;
+        }
+
+        .kpmp-footer {
+            grid-area: kpmp-footer;
+            background-color: rgb(18, 27, 43);
+            color: white;
+            width: 100%;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 24px;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .kpmp-footer footer {
+            margin: 18px;
+        }
+
+        .idp-ds {
+            margin-top:12px;
+        }
+
+        .instr {
+            line-height: 24px;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .welcome {
+            color: rgb(40, 60, 94);
+            font-size: 32px;
+            margin-top: 20px;
+        }
+
+        .select-instr {
+            color: #283C5E;
+            margin-top: 12px;
+            font-size: 18px;
+        }
+
+        .idp-form-row {
+            display: flex;
+            margin-top: 12px;
+        }
+
+        #idp-dropdown-wrap {
+            margin-right: 20px;
+        }
+
+        .idp-dropdown {
+            width: 350px;
+            max-height: 250px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+
+        #idp-select-btn {
+            width: 110px;
+            background-color: #0275d8;
+        }
+
+        .caret {
+            position: absolute;
+            left: 90%;
+            top: 45%;
+        }
+
+        .idp-dropdown-btn-text {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            border: 0;
+            width: 300px;
+        }
+
+        #idp-dropdown-btn::after {
+            color: transparent;
+        }
+
+        #idp-dropdown-btn {
+            text-align: left;
+        }
+
+        #idp-dropdown-instr::after {
+            float: right;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: middle;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            color: rgb(128, 128, 128);
+            margin-top: 10px;
+        }
+
+        .remember-me-check-wrap {
+            margin-top: 10px;
+        }
+
+        .remember-me-check-text {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            color: rgb(51, 51, 51);
+            margin-left: -3px;
+            padding-top: 4px;
+        }
+
+        #idp-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        #idp-search {
+            font-family: "Helvetica";
+            font-size: 14px;
+            font-weight: 400;
+            color: #373A3C;
+            margin: 4px 0px 4px 10px;
+            width: 348px;
+        }
+
+        #idp-search:hover {
+            cursor: text;
+        }
+
+        .idp-option {
+            display: flex;
+            width: inherit;
+            margin: 5px 0px 5px -40px;
+            height: 30px;
+        }
+
+        .idp-option:hover {
+            background-color: lightgray;
+        }
+
+        .idp-option-text {
+            flex-basis: 100%;
+            font-family: "Helvetica";
+            font-size: 14px;
+            font-weight: 400;
+            color: #373A3C;
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        .btn-primary-outline {
+            background-color: transparent;
+            border-color: #ccc;
+            color: gray;
+        }
+
+        .uwid-sponsor-box {
+            border-radius: 4px;
+            border-color: rgba(188, 223, 241, 1);
+            background-color: #e6f1ff;
+            box-sizing: border-box;
+            border-width: 1px;
+            border-style: solid;
+            width: 580px;
+            height: 80px;
+            position: absolute;
+            top: 105px;
+        }
+
+        .uwid-sponsor-msg {
+            color: #283C5E;
+            word-wrap: break-word;
+            font-size: 14px;
+            text-align: left;
+            line-height: 24px;
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="kpmp-header">
+            <img src="img/kpmp-logo-mock.png" width="124" />
+        </div>
+        <div class="kpmp-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 idp-ds">
+                        <div class="welcome instr">Welcome</div>
+                        <div class="select-instr instr">Select your institution below to sign in with your institution
+                            account</div>
+                        <div class="idp-form-row">
+                            <div id="idp-dropdown-wrap" class="dropdown">
+                                <button class="btn btn-primary-outline dropdown-toggle idp-dropdown" type="button" id="idp-dropdown-btn"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span id="idp-dropdown-instr" class="idp-dropdown-btn-text" data-short="">Search or select institution</span>
+                                </button>
+                                <div id="idp-dropdown-container" class="dropdown-menu idp-dropdown" aria-labelledby="dropdownMenuButton">
+                                    <input id="idp-search" class="idp-dropdown-btn-text" placeholder="Search..." />
+                                    <ul id="idp-list">
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="idp-submit">
+                                <button id="idp-select-btn" type="button" class="btn btn-primary">
+                                    <span class="idp-select-btn-text">Select</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="remember-me" class="form-check remember-me-check-wrap">
+                            <input type="checkbox" class="form-check-input" id="remember-me-check">
+                            <label class="form-check-label remember-me-check-text" for="remember-me-check">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="uwid-sponsor-box">
+                            <div class="uwid-sponsor-msg">
+                                If you were issued a Sponsored University of Washington Net ID please select University of Washington. Need help? <a href="mailto:info@kpmp.org">Contact us</a> for assistance.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kpmp-footer">
+            <footer class="footer">
+                <p class="">
+                    The Kidney Precision Medicine Project is an initiative of the National Institute of Diabetes and
+                    Digestive and Kidney Disease (NIDDK).<br>
+
+                    &#169; 2017 Kidney Precision Medicine Project</p>
+            </footer>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const kpmpMembers = [
+            {
+                short: 'uw',
+                institution: 'University of Washington',
+                entityId: 'urn:mace:incommon:washington.edu'
+            },
+            {
+                short: 'um',
+                institution: 'University of Michigan',
+                entityId: 'https://shibboleth.umich.edu/idp/shibboleth'
+            },
+            {
+                short: 'broad',
+                institution: 'Broad Institute',
+                entityId: 'https://idp.broadinstitute.org/idp/shibboleth'
+            },
+            {
+                short: 'columbia',
+                institution: 'Columbia University',
+                entityId: 'urn:mace:incommon:columbia.edu'
+            },
+            {
+                short: 'harvard',
+                institution: 'Harvard',
+                entityId: 'https://fed.huit.harvard.edu/idp/shibboleth'
+            },
+            {
+                short: 'iu',
+                institution: 'Indiana University',
+                entityId: 'urn:mace:incommon:iu.edu'
+            },
+            {
+                short: 'THE',
+                institution: 'Ohio State University',
+                entityId: 'urn:mace:incommon:osu.edu'
+            },
+            {
+                short: 'ucsf',
+                institution: 'UC San Francisco',
+                entityId: 'urn:mace:incommon:ucsf.edu'
+            },
+            {
+                short: 'utsw',
+                institution: 'UT Southwestern',
+                entityId: 'https://shib2.swmed.edu/idp/shibboleth'
+            },
+            {
+                short: 'ucsd',
+                institution: 'UC San Diego',
+                entityId: 'urn:mace:incommon:ucsd.edu',
+                extra: 'authnContextClassRef=urn:mace:ucsd.edu:sso:studentsso urn:mace:ucsd.edu:sso:actsso urn:mace:ucsd.edu:sso:ad'
+            },
+            {
+                short: 'pitt',
+                institution: 'University of Pittsburgh',
+                entityId: 'https://passport.pitt.edu/idp/shibboleth'
+            },
+            {
+                short: 'uthsa',
+                institution: 'University of Texas Health San Antonio',
+                entityId: 'https://shib.uthscsa.edu/idp/shibboleth'
+            },
+            {
+                short: 'washu',
+                institution: 'Washington University in St Louis',
+                entityId: 'https://login.wustl.edu/idp/shibboleth'
+            },
+            {
+                short: 'yale',
+                institution: 'Yale University',
+                entityId: 'https://auth.yale.edu/idp/shibboleth'
+            }
+        ].sort((a, b) => {
+            if (a.institution < b.institution) return -1;
+            if (a.institution > b.institution) return 1;
+            return 0;
+        });
+
+        const idpOption = (member) => {
+            return '<li class="idp-option" id="' + member.short + '"><div class="idp-option-text">' + member.institution + '</div></li>';
+        };
+
+        const makeIdpList = () => {
+            return kpmpMembers.map(idpOption);
+        };
+        
+        const getQueryParameters = () => {
+            const result = {};
+            const paramStr = window.location.search.substr(1);
+            if (!paramStr) {
+                return result;
+            }
+            const parts = paramStr.split('&');
+            for (let param of parts) {
+                const kvp = param.split('=');
+                const key   = kvp[0],
+                      value = kvp[1];
+                if (!result.hasOwnProperty(key)) {
+                    result[key] = [];
+                }
+                result[key].push(value);
+            }
+            return result;
+        };
+
+        const params = Object.freeze(getQueryParameters());
+
+        const setCookie = (key, value, days) => {
+            if (!value) { return; }
+            let expires = '';
+            if (days == undefined) {
+                const exp = new Date();
+                exp.setTime(exp.getTime() + days*24*60*60*1000);
+                expires = 'expires=' + exp.toUTCString() + ';';
+            }
+            document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + ';' + expires;
+        }
+
+        const deleteCookie = (key) => {
+            const exp = new Date();
+            exp.setTime(exp.getTime() - 365*24*60*60*1000);
+            const expires = 'expires=' + exp.toUTCString();
+            document.cookie = encodeURIComponent(key) + '=;' + expires + ';';
+        }
+
+        const getCookie = (key) => {
+            const name = encodeURIComponent(key) + '=';
+            const decoded = decodeURIComponent(document.cookie);
+            const all = decoded.split(';');
+            for (let i = 0; i < all.length; i++) {
+                let c  = all[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return '';
+        }
+
+        const baseUrl = 'https://welcome.kpmp.org/Shibboleth.sso/Login?';
+
+        const getRedirectUri = (homebase) => {
+            let url = baseUrl;
+            const entity = 'entityID=' + homebase.entityId;
+            
+            let target = '';
+            if (params.target) {
+                target = '&target=' + params.target;
+            } else {
+                console.log("KPMP wasn't told where to redirect back to.");
+                // TODO(cspital) figure out a sane fallback if there is no target
+                target = '&target=/';
+            }
+
+            let extra = '';
+            if (homebase.extra) {
+                extra = '&' + encodeURIComponent(homebase.extra);
+            }
+
+            return url + entity + target + extra;
+        };
+
+        $('#idp-dropdown-btn').click(() => {
+            setTimeout(() => {$('#idp-search').focus()}, 0);
+        });
+        
+        $(document).on('click', '.idp-option', (e) => {
+            let recv = e.target;
+            if (recv.nodeName === 'DIV' && recv.classList.contains('idp-option-text')) {
+                recv = recv.parentNode;
+            }
+            const id = recv.id;
+            const member = kpmpMembers.find(m => m.short === id);
+            const btn = $('#idp-dropdown-instr');
+            btn.text(member.institution);
+            btn.data('short', id);
+        });
+
+        $('#idp-search').on('input', (e) => {
+            const value = e.target.value.toLowerCase().trim();
+            if (!value || !value.trim()) {
+                ALL_IDPS.forEach(idp => idp.show());
+                return;
+            }
+            ALL_IDPS.forEach(idp => {
+                const inner = idp.text().toLowerCase().trim();
+                if (inner.indexOf(value) === -1) {
+                    idp.hide();
+                } else {
+                    idp.show();
+                }
+            });
+        });
+
+        $('#idp-select-btn').click(e => {
+            const remember = $('#remember-me-check')[0];
+            const short = $('#idp-dropdown-instr').data('short');
+            if (!short) {
+                return;
+            }
+
+            const homebase = kpmpMembers.find(m => m.short === short);
+            if (!homebase) {
+                return;
+            }
+            
+            if (remember.checked) {
+                setCookie('homebase', homebase.short);
+            } else {
+                deleteCookie('homebase');
+            }
+
+            const target = getRedirectUri(homebase);
+            window.location.href = target;
+        });
+
+        let ALL_IDPS;
+        $(() => {
+            const idps = makeIdpList();
+            $('#idp-list').html(idps);
+            $('#idp-search').val('');
+            ALL_IDPS = Array.from($('.idp-option')).map(i => $(i));
+
+            const short = getCookie('homebase');
+            if (short) {
+                $('#remember-me-check')[0].checked = true;
+
+                const homebase = kpmpMembers.find(m => m.short === short);
+                if (homebase) {
+                    const btn = $('#idp-dropdown-instr');
+                    btn.text(homebase.institution);
+                    btn.data('short', homebase.short);
+                } else {
+                    deleteCookie('homebase');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
