@@ -421,8 +421,8 @@
             const entity = 'entityID=' + homebase.entityId;
             
             let target = '';
-            if (params.target) {
-                target = '&target=' + params.target;
+            if (params.return) {
+                target = '&target=' + params.return;
             } else {
                 console.log("KPMP wasn't told where to redirect back to.");
                 // TODO(cspital) figure out a sane fallback if there is no target
@@ -488,7 +488,8 @@
             }
 
             const target = getRedirectUri(homebase);
-            window.location.href = target;
+            console.log(target);
+            //window.location.href = target;
         });
 
         let ALL_IDPS;
