@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -343,31 +344,27 @@
                 institution: 'Yale University',
                 entityId: 'https://auth.yale.edu/idp/shibboleth'
             }
-        ].sort((a, b) => {
+        ].sort(function (a, b) {
             if (a.institution < b.institution) return -1;
             if (a.institution > b.institution) return 1;
             return 0;
         });
 
-        const idpOption = (member) => {
+        function idpOption(member) {
             return '<li class="idp-option" id="' + member.short + '"><div class="idp-option-text">' + member.institution + '</div></li>';
         };
-
-        const makeIdpList = () => {
-            return kpmpMembers.map(idpOption);
-        };
         
-        const getQueryParameters = () => {
+        function getQueryParameters() {
             const result = {};
             const paramStr = window.location.search.substr(1);
             if (!paramStr) {
                 return result;
             }
             const parts = paramStr.split('&');
-            for (let param of parts) {
+            for (let param in parts) {
                 const kvp = param.split('=');
-                const key   = kvp[0],
-                      value = kvp[1];
+                const key = kvp[0];
+                const value = kvp[1];
                 if (!result.hasOwnProperty(key)) {
                     result[key] = [];
                 }
@@ -378,8 +375,8 @@
 
         const params = Object.freeze(getQueryParameters());
 
-        const setCookie = (key, value, days) => {
-            if (!value) { return; }
+        function setCookie(key, value, days) {
+            if (!value) return;
             let expires = '';
             if (days == undefined) {
                 const exp = new Date();
@@ -389,14 +386,14 @@
             document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + ';' + expires;
         }
 
-        const deleteCookie = (key) => {
+        function deleteCookie(key) {
             const exp = new Date();
             exp.setTime(exp.getTime() - 365*24*60*60*1000);
             const expires = 'expires=' + exp.toUTCString();
             document.cookie = encodeURIComponent(key) + '=;' + expires + ';';
         }
 
-        const getCookie = (key) => {
+        function getCookie(key) {
             const name = encodeURIComponent(key) + '=';
             const decoded = decodeURIComponent(document.cookie);
             const all = decoded.split(';');
@@ -414,15 +411,15 @@
 
         const baseUrl = 'https://welcome.kpmp.org/Shibboleth.sso/Login?';
 
-        const getRedirectUri = (homebase) => {
-            let url = baseUrl;
+        function getRedirectUri(homebase) {
+            const url = baseUrl;
             const entity = 'entityID=' + homebase.entityId;
             
             let target = '';
             if (params.return) {
                 target = '&target=' + params.return;
             } else {
-                console.log("KPMP wasn't told where to redirect back to.");
+                console.warn("KPMP wasn't told where to redirect back to, defaulting.");
                 // TODO(cspital) figure out a sane fallback if there is no target
                 target = '&target=/';
             }
@@ -435,50 +432,55 @@
             return url + entity + target + extra;
         };
 
-        $('#idp-dropdown-btn').click(() => {
-            setTimeout(() => {$('#idp-search').focus()}, 0);
+        $('#idp-dropdown-btn').click(function() {
+            setTimeout(function() {$('#idp-search').focus()}, 0);
         });
         
-        $(document).on('click', '.idp-option', (e) => {
+        $(document).on('click', '.idp-option', function(e) {
             let recv = e.target;
             if (recv.nodeName === 'DIV' && recv.classList.contains('idp-option-text')) {
                 recv = recv.parentNode;
             }
             const id = recv.id;
-            const member = kpmpMembers.find(m => m.short === id);
+            const member = kpmpMembers.filter(function(m) { return m.short === id })[0];
             const btn = $('#idp-dropdown-instr');
             btn.text(member.institution);
             btn.data('short', id);
         });
 
-        $('#idp-search').on('input', (e) => {
+        $('#idp-search').on('input', function(e) {
             const value = e.target.value.toLowerCase().trim();
-            if (!value || !value.trim()) {
-                ALL_IDPS.forEach(idp => idp.show());
+            if (!value) {
+                for (let idp in ALL_IDPS) {
+                    $(ALL_IDPS[idp]).show();
+                }
                 return;
             }
-            ALL_IDPS.forEach(idp => {
-                const inner = idp.text().toLowerCase().trim();
+
+            for (let idp in ALL_IDPS) {
+                const elem = $(ALL_IDPS[idp]);
+                const inner = elem.text().toLowerCase().trim();
                 if (inner.indexOf(value) === -1) {
-                    idp.hide();
+                    elem.hide();
                 } else {
-                    idp.show();
+                    elem.show();
                 }
-            });
+            }
         });
 
-        $('#idp-select-btn').click(e => {
+        $('#idp-select-btn').click(function(e) {
             const remember = $('#remember-me-check')[0];
             const short = $('#idp-dropdown-instr').data('short');
             if (!short) {
                 return;
             }
 
-            const homebase = kpmpMembers.find(m => m.short === short);
-            if (!homebase) {
+            let homebase = kpmpMembers.filter(function(m) { return m.short === short });
+            if (!homebase.length) {
                 return;
             }
             
+            homebase = homebase[0];
             if (remember.checked) {
                 setCookie('homebase', homebase.short);
             } else {
@@ -489,19 +491,20 @@
             window.location.href = target;
         });
 
-        let ALL_IDPS;
-        $(() => {
-            const idps = makeIdpList();
+        let ALL_IDPS
+        $(function() {
+            const idps = kpmpMembers.map(idpOption);
             $('#idp-list').html(idps);
             $('#idp-search').val('');
-            ALL_IDPS = Array.from($('.idp-option')).map(i => $(i));
+            ALL_IDPS = $('.idp-option');
 
             const short = getCookie('homebase');
             if (short) {
                 $('#remember-me-check')[0].checked = true;
 
-                const homebase = kpmpMembers.find(m => m.short === short);
-                if (homebase) {
+                let homebase = kpmpMembers.filter(function(m) { return m.short === short});
+                if (homebase.length) {
+                    homebase = homebase[0];
                     const btn = $('#idp-dropdown-instr');
                     btn.text(homebase.institution);
                     btn.data('short', homebase.short);
