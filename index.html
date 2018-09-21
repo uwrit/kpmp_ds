@@ -352,28 +352,53 @@
 
         function idpOption(member) {
             return '<li class="idp-option" id="' + member.short + '"><div class="idp-option-text">' + member.institution + '</div></li>';
-        };
+        }
         
-        function getQueryParameters() {
+        // function getQueryParameters() {
+        //     const result = {};
+        //     const paramStr = window.location.search.substr(1);
+        //     if (!paramStr) {
+        //         return result;
+        //     }
+        //     const parts = paramStr.split('&');
+        //     for (let param in parts) {
+        //         const kvp = parts[param].split('=');
+        //         const key = kvp[0];
+        //         const value = kvp[1];
+        //         if (!result.hasOwnProperty(key)) {
+        //             result[key] = [];
+        //         }
+        //         result[key].push(value);
+        //     }
+        //     return result;
+        // }
+
+        function getQueryParameters2() {
+            const specParams = ['policy=', 'returnIDParam=', 'isPassive='];
+            const url = window.location.search.substr(1);
             const result = {};
-            const paramStr = window.location.search.substr(1);
-            if (!paramStr) {
+            if (!url) {
                 return result;
             }
-            const parts = paramStr.split('&');
-            for (let param in parts) {
-                const kvp = param.split('=');
-                const key = kvp[0];
-                const value = kvp[1];
-                if (!result.hasOwnProperty(key)) {
-                    result[key] = [];
-                }
-                result[key].push(value);
+            let target = url.split('return=');
+            if (!target.length) {
+                return result;
             }
+            target = target[1];
+            for (let maybe in specParams) {
+                const extra = target.split(specParams[maybe], 1);
+                if (extra.length) {
+                    target = extra[0];
+                }
+            }
+            if (target.charAt(target.length-1) === '&') {
+                target = target.substring(0, target.length-1);
+            }
+            result['return'] = target;
             return result;
-        };
+        }
 
-        const params = Object.freeze(getQueryParameters());
+        const params = Object.freeze(getQueryParameters2());
 
         function setCookie(key, value, days) {
             if (!value) return;
@@ -430,7 +455,7 @@
             }
 
             return url + entity + target + extra;
-        };
+        }
 
         $('#idp-dropdown-btn').click(function() {
             setTimeout(function() {$('#idp-search').focus()}, 0);
