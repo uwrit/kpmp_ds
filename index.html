@@ -353,26 +353,8 @@
         function idpOption(member) {
             return '<li class="idp-option" id="' + member.short + '"><div class="idp-option-text">' + member.institution + '</div></li>';
         }
-        
-        // function getQueryParameters() {
-        //     const result = {};
-        //     const paramStr = window.location.search.substr(1);
-        //     if (!paramStr) {
-        //         return result;
-        //     }
-        //     const parts = paramStr.split('&');
-        //     for (let param in parts) {
-        //         const kvp = parts[param].split('=');
-        //         const key = kvp[0];
-        //         const value = kvp[1];
-        //         if (!result.hasOwnProperty(key)) {
-        //             result[key] = [];
-        //         }
-        //         result[key].push(value);
-        //     }
-        //     return result;
-        // }
 
+        // TODO(cspital) refactor this to be more flexible
         function getQueryParameters2() {
             const specParams = ['policy=', 'returnIDParam=', 'isPassive='];
             const url = window.location.search.substr(1);
@@ -394,6 +376,15 @@
             if (target.charAt(target.length-1) === '&') {
                 target = target.substring(0, target.length-1);
             }
+
+            target = decodeURIComponent(target);
+            
+            let search = target.split('?');
+            if (search.length !== 2) {
+                return result;
+            }
+            
+            target = search[1];
             result['return'] = target;
             return result;
         }
@@ -442,7 +433,7 @@
             
             let target = '';
             if (params.return) {
-                target = '&target=' + params.return;
+                target = '&' + params.return;
             } else {
                 console.warn("KPMP wasn't told where to redirect back to, defaulting.");
                 // TODO(cspital) figure out a sane fallback if there is no target
