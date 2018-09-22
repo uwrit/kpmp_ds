@@ -355,7 +355,7 @@
         }
 
         // TODO(cspital) refactor this to be more flexible
-        function getQueryParameters2() {
+        function getShibbolethParams() {
             const specParams = ['policy=', 'returnIDParam=', 'isPassive='];
             const url = window.location.search.substr(1);
             const result = {};
@@ -363,7 +363,7 @@
                 return result;
             }
             let target = url.split('return=');
-            if (!target.length) {
+            if (!target.length !== 2) {
                 return result;
             }
             target = target[1];
@@ -389,7 +389,7 @@
             return result;
         }
 
-        const params = Object.freeze(getQueryParameters2());
+        const params = Object.freeze(getShibbolethParams());
 
         function setCookie(key, value, days) {
             if (!value) return;
