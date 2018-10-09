@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -217,6 +218,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="grid-container">
         <div class="kpmp-header">
@@ -233,7 +235,8 @@
                             <div id="idp-dropdown-wrap" class="dropdown">
                                 <button class="btn btn-primary-outline dropdown-toggle idp-dropdown" type="button" id="idp-dropdown-btn"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span id="idp-dropdown-instr" class="idp-dropdown-btn-text" data-short="">Search or select institution</span>
+                                    <span id="idp-dropdown-instr" class="idp-dropdown-btn-text" data-short="">Search or
+                                        select institution</span>
                                 </button>
                                 <div id="idp-dropdown-container" class="dropdown-menu idp-dropdown" aria-labelledby="dropdownMenuButton">
                                     <input id="idp-search" class="idp-dropdown-btn-text" placeholder="Search..." />
@@ -255,7 +258,8 @@
                     <div class="col-lg-6">
                         <div class="uwid-sponsor-box">
                             <div class="uwid-sponsor-msg">
-                                If you were issued a Sponsored University of Washington Net ID please select University of Washington. Need help? <a href="mailto:info@kpmp.org">Contact us</a> for assistance.
+                                If you were issued a Sponsored University of Washington Net ID please select University
+                                of Washington. Need help? <a href="mailto:info@kpmp.org">Contact us</a> for assistance.
                             </div>
                         </div>
                     </div>
@@ -353,6 +357,21 @@
                 short: 'princeton',
                 institution: 'Princeton University',
                 entityId: 'https://idp.princeton.edu/idp/shibboleth'
+            },
+            {
+                short: 'duke',
+                institution: 'Duke University',
+                entityId: 'urn:mace:incommon:duke.edu'
+            },
+            {
+                short: 'jhu',
+                institution: 'Johns Hopkins',
+                entityId: 'urn:mace:incommon:johnshopkins.edu'
+            },
+            {
+                short: 'stanford',
+                institution: 'Stanford University',
+                entityId: 'urn:mace:incommon:stanford.edu'
             }
         ].sort(function (a, b) {
             if (a.institution < b.institution) return -1;
@@ -383,8 +402,8 @@
                     target = extra[0];
                 }
             }
-            if (target.charAt(target.length-1) === '&') {
-                target = target.substring(0, target.length-1);
+            if (target.charAt(target.length - 1) === '&') {
+                target = target.substring(0, target.length - 1);
             }
             target = decodeURIComponent(target);
             let search = target.split('?');
@@ -403,7 +422,7 @@
             let expires = '';
             if (days == undefined) {
                 const exp = new Date();
-                exp.setTime(exp.getTime() + days*24*60*60*1000);
+                exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
                 expires = 'expires=' + exp.toUTCString() + ';';
             }
             document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + ';' + expires;
@@ -411,7 +430,7 @@
 
         function deleteCookie(key) {
             const exp = new Date();
-            exp.setTime(exp.getTime() - 365*24*60*60*1000);
+            exp.setTime(exp.getTime() - 365 * 24 * 60 * 60 * 1000);
             const expires = 'expires=' + exp.toUTCString();
             document.cookie = encodeURIComponent(key) + '=;' + expires + ';';
         }
@@ -421,7 +440,7 @@
             const decoded = decodeURIComponent(document.cookie);
             const all = decoded.split(';');
             for (let i = 0; i < all.length; i++) {
-                let c  = all[i];
+                let c = all[i];
                 while (c.charAt(0) === ' ') {
                     c = c.substring(1);
                 }
@@ -437,7 +456,7 @@
         function getRedirectUri(homebase) {
             const url = baseUrl;
             const entity = 'entityID=' + homebase.entityId;
-            
+
             let target = '';
             if (params.return) {
                 target = '&' + params.return;
@@ -455,23 +474,23 @@
             return url + entity + target + extra;
         }
 
-        $('#idp-dropdown-btn').click(function() {
-            setTimeout(function() {$('#idp-search').focus()}, 0);
+        $('#idp-dropdown-btn').click(function () {
+            setTimeout(function () { $('#idp-search').focus() }, 0);
         });
-        
-        $(document).on('click', '.idp-option', function(e) {
+
+        $(document).on('click', '.idp-option', function (e) {
             let recv = e.target;
             if (recv.nodeName === 'DIV' && recv.classList.contains('idp-option-text')) {
                 recv = recv.parentNode;
             }
             const id = recv.id;
-            const member = kpmpMembers.filter(function(m) { return m.short === id })[0];
+            const member = kpmpMembers.filter(function (m) { return m.short === id })[0];
             const btn = $('#idp-dropdown-instr');
             btn.text(member.institution);
             btn.data('short', id);
         });
 
-        $('#idp-search').on('input', function(e) {
+        $('#idp-search').on('input', function (e) {
             const value = e.target.value.toLowerCase().trim();
             if (!value) {
                 for (let idp in ALL_IDPS) {
@@ -491,18 +510,18 @@
             }
         });
 
-        $('#idp-select-btn').click(function(e) {
+        $('#idp-select-btn').click(function (e) {
             const remember = $('#remember-me-check')[0];
             const short = $('#idp-dropdown-instr').data('short');
             if (!short) {
                 return;
             }
 
-            let homebase = kpmpMembers.filter(function(m) { return m.short === short });
+            let homebase = kpmpMembers.filter(function (m) { return m.short === short });
             if (!homebase.length) {
                 return;
             }
-            
+
             homebase = homebase[0];
             if (remember.checked) {
                 setCookie('homebase', homebase.short);
@@ -515,7 +534,7 @@
         });
 
         let ALL_IDPS
-        $(function() {
+        $(function () {
             const idps = kpmpMembers.map(idpOption);
             $('#idp-list').html(idps);
             $('#idp-search').val('');
@@ -525,7 +544,7 @@
             if (short) {
                 $('#remember-me-check')[0].checked = true;
 
-                let homebase = kpmpMembers.filter(function(m) { return m.short === short});
+                let homebase = kpmpMembers.filter(function (m) { return m.short === short });
                 if (homebase.length) {
                     homebase = homebase[0];
                     const btn = $('#idp-dropdown-instr');
@@ -538,4 +557,5 @@
         });
     </script>
 </body>
+
 </html>
