@@ -419,25 +419,24 @@
 
         function setCookie(key, value, days) {
             if (!value) return;
-            let expires = '';
-            if (days == undefined) {
-                const exp = new Date();
-                exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
-                expires = 'expires=' + exp.toUTCString() + ';';
-            }
-            document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + ';' + expires;
+            const exp = new Date();
+            const shift = days || 365;
+            exp.setTime(exp.getTime() + shift * 24 * 60 * 60 * 1000);
+            expires = 'expires=' + exp.toUTCString() + ';';
+            console.log(key + '=' + value + ';' + expires);
+            document.cookie = key + '=' + value + ';' + expires;
         }
 
         function deleteCookie(key) {
             const exp = new Date();
             exp.setTime(exp.getTime() - 365 * 24 * 60 * 60 * 1000);
             const expires = 'expires=' + exp.toUTCString();
-            document.cookie = encodeURIComponent(key) + '=;' + expires + ';';
+            document.cookie = key + '=;' + expires + ';';
         }
 
         function getCookie(key) {
-            const name = encodeURIComponent(key) + '=';
-            const decoded = decodeURIComponent(document.cookie);
+            const name = key + '=';
+            const decoded = document.cookie;
             const all = decoded.split(';');
             for (let i = 0; i < all.length; i++) {
                 let c = all[i];
