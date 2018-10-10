@@ -423,7 +423,6 @@
             const shift = days || 365;
             exp.setTime(exp.getTime() + shift * 24 * 60 * 60 * 1000);
             expires = 'expires=' + exp.toUTCString() + ';';
-            console.log(key + '=' + value + ';' + expires);
             document.cookie = key + '=' + value + ';' + expires;
         }
 
