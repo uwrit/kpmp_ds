@@ -1,3 +1,3 @@
-# shib-ds
+# kpmp-ds
 
-Contains the shibds page for welcome.kpmp.org
+Contains the Discovery Service for welcome.kpmp.org
