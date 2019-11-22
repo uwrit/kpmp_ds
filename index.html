@@ -472,9 +472,8 @@
             return url + entity + target + extra;
         }
 
-        $('#idp-dropdown-btn').click(function (e) {
+        $('#idp-dropdown-btn').click(function () {
             setTimeout(function () { $('#idp-search').focus() }, 0);
-            if (e.offsetX <= e.target.clientWidth) { onClickOutsideEvent(e); }
         });
 
         $(document).on('click', '.idp-option', function (e) {
