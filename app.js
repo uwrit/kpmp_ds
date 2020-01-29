@@ -187,8 +187,7 @@ function getRedirectUri(homebase) {
 
     let extra = '';
     if (homebase.extra) {
-//         extra = '&' + encodeURIComponent(homebase.extra);
-        extra = '&' + homebase.extra;
+        extra = '&' + encodeURIComponent(homebase.extra);
     }
 
     return url + entity + target + extra;
