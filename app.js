@@ -127,11 +127,6 @@ function getShibbolethParams() {
         target = target.substring(0, target.length - 1);
     }
     target = decodeURIComponent(target);
-    let search = target.split('?');
-    if (search.length !== 2) {
-        return result;
-    }
-    target = search[1];
     result['return'] = target;
     return result;
 }
@@ -178,7 +173,7 @@ function getRedirectUri(homebase) {
 
     let target = '';
     if (params.return) {
-        target = '&' + params.return;
+        target = params.return + '&';
     } else {
         console.warn("KPMP wasn't told where to redirect back to, defaulting.");
         // TODO(cspital) figure out a sane fallback if there is no target
@@ -190,7 +185,7 @@ function getRedirectUri(homebase) {
         extra = '&' + encodeURIComponent(homebase.extra);
     }
 
-    return url + entity + target + extra;
+    return target + entity + extra;
 }
 
 $('#idp-dropdown-btn').click(function () {
