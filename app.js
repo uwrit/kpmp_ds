@@ -93,6 +93,11 @@ const kpmpMembers = [
         short: 'stanford',
         institution: 'Stanford University',
         entityId: 'urn:mace:incommon:stanford.edu'
+    },
+    {
+        short: 'vanderbilt',
+        institution: 'Vanderbilt University',
+        entityId: 'https://sso-login-uat.vanderbilt.edu'
     }
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
