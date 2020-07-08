@@ -103,6 +103,11 @@ const kpmpMembers = [
         short: 'cwru',
         institution: 'Case Western Reserve University',
         entityId: 'urn:mace:incommon:case.edu'
+    },
+    {
+        short: 'cincinnati',
+        institution: 'University of Cincinnati',
+        entityId: 'https://login.uc.edu/idp/shibboleth'
     }
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
