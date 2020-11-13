@@ -105,6 +105,11 @@ const kpmpMembers = [
         entityId: 'urn:mace:incommon:case.edu'
     },
     {
+        short: 'north',
+        institution: 'Northwestern University',
+        entityId: 'urn:mace:incommon:northwestern.edu'
+    },
+    {
         short: 'cincinnati',
         institution: 'University of Cincinnati',
         entityId: 'https://login.uc.edu/idp/shibboleth'
