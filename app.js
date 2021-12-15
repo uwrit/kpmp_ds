@@ -27,7 +27,7 @@ const kpmpMembers = [
     {
         short: 'iu',
         institution: 'Indiana University',
-        entityId: 'urn:mace:incommon:iu.edu'
+        entityId: 'https://idp.login.iu.edu/idp/shibboleth'
     },
     {
         short: 'THE',
