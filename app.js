@@ -113,6 +113,41 @@ const kpmpMembers = [
         short: 'cincinnati',
         institution: 'University of Cincinnati',
         entityId: 'https://login.uc.edu/idp/shibboleth'
+    },
+    {
+        short: 'ms',
+        institution: 'Icahn School of Medicine at Mount Sinai',
+        entityId: 'https://sso.mssm.edu/idp'
+    },
+    {
+        short: 'arizona',
+        institution: 'University of Arizona',
+        entityId: 'urn:mace:incommon:arizona.edu'
+    },
+    {
+        short: 'colorado',
+        institution: 'University of Colorado',
+        entityId: 'https://fedauth.colorado.edu/idp/shibboleth'
+    },
+    {
+        short: 'florida',
+        institution: 'University of Florida',
+        entityId: 'https://login.ufl.edu/idp/shibboleth'
+    },
+    {
+        short: 'illinois',
+        institution: 'University of Illinois Chicago',
+        entityId: 'https://shibboleth.uic.edu/shibboleth'
+    },
+    {
+        short: 'minnesota',
+        institution: 'University of Minnesota',
+        entityId: 'urn:mace:incommon:umn.edu'
+    },
+    {
+        short: 'ncch',
+        institution: 'University of North Carolina at Chapel Hill',
+        entityId: 'urn:mace:incommon:unc.edu'
     }
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
