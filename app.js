@@ -12,7 +12,7 @@ const kpmpMembers = [
     {
         short: 'broad',
         institution: 'Broad Institute',
-        entityId: 'https://idp.broadinstitute.org/idp/shibboleth'
+        entityId: 'https://idp01.broadinstitute.org/idp/shibboleth'
     },
     {
         short: 'columbia',
@@ -123,11 +123,6 @@ const kpmpMembers = [
         short: 'arizona',
         institution: 'University of Arizona',
         entityId: 'urn:mace:incommon:arizona.edu'
-    },
-    {
-        short: 'colorado',
-        institution: 'University of Colorado',
-        entityId: 'https://fedauth.colorado.edu/idp/shibboleth'
     },
     {
         short: 'florida',
