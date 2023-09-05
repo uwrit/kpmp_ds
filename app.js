@@ -143,6 +143,11 @@ const kpmpMembers = [
         short: 'ncch',
         institution: 'University of North Carolina at Chapel Hill',
         entityId: 'urn:mace:incommon:unc.edu'
+    },
+    {
+        short: 'anschutz',
+        institution: 'University of Colorado Denver | Anschutz Medical Campus',
+        entityId: 'https://idcs-6dfbdd810afa4d509f6cfc191d612acd.identity.oraclecloud.com:443/fed'
     }
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
