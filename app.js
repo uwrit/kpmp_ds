@@ -151,7 +151,7 @@ const kpmpMembers = [
     },
     {
         short:'heidelberg',
-        institution: 'German Cancer Research Center Heidelberg',
+        institution: 'Universität Heidelberg',
         entityId: 'https://dkfzshib.inet.dkfz-heidelberg.de/idp/shibboleth'
     }
 ].sort(function (a, b) {
