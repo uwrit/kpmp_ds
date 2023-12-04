@@ -148,6 +148,11 @@ const kpmpMembers = [
         short: 'anschutz',
         institution: 'University of Colorado Denver | Anschutz Medical Campus',
         entityId: 'https://idcs-6dfbdd810afa4d509f6cfc191d612acd.identity.oraclecloud.com:443/fed'
+    },
+    {
+        short:'heidelberg',
+        institution: 'German Cancer Research Center Heidelberg',
+        entityId: 'https://dkfzshib.inet.dkfz-heidelberg.de/idp/shibboleth'
     }
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
