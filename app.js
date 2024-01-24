@@ -152,7 +152,7 @@ const kpmpMembers = [
     {
         short:'heidelberg',
         institution: 'Universität Heidelberg',
-        entityId: 'https://dkfzshib.inet.dkfz-heidelberg.de/idp/shibboleth'
+        entityId: 'https://idp.uni-heidelberg.de'
     }
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
