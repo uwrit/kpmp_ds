@@ -97,7 +97,7 @@ const kpmpMembers = [
     {
         short: 'vanderbilt',
         institution: 'Vanderbilt University',
-        entityId: 'https://sso-login-uat.vanderbilt.edu'
+        entityId: 'https://sso-login.vanderbilt.edu'
     },
     {
         short: 'cwru',
