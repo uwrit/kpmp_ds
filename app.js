@@ -153,7 +153,12 @@ const kpmpMembers = [
         short:'heidelberg',
         institution: 'Universität Heidelberg',
         entityId: 'https://idp.uni-heidelberg.de'
-    }
+    },
+    {
+        short:'mayo',
+        institution: 'Mayo Clinic',
+        entityId: 'http://login.mayo.edu/adfs/services/trust'
+    }    
 ].sort(function (a, b) {
     if (a.institution < b.institution) return -1;
     if (a.institution > b.institution) return 1;
